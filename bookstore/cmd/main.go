@@ -5,13 +5,13 @@ import "fmt"
 var books []Book
 
 type Book struct {
-	author            string
-	title             string
-	copies            int64
-	onSpecial         bool
-	specialOffer      string
-	royaltyPercentage float64
-	priceInCents      int64
+	Author            string
+	Title             string
+	Copies            int64
+	OnSpecial         bool
+	SpecialOffer      string
+	RoyaltyPercentage float64
+	PriceInCents      int64
 }
 
 func AddBook(catalog []Book, book Book) []Book {
@@ -22,28 +22,32 @@ func AddBook(catalog []Book, book Book) []Book {
 func main() {
 
 	books = []Book{
-		{author: "V. Anton Spraul",
-			title:             "Think Like a Programmer: An Introduction to Creative Problem Solving",
-			copies:            1,
-			onSpecial:         false,
-			specialOffer:      "0%",
-			royaltyPercentage: 15.5,
-			priceInCents:      900},
+		{
+			Author:            "V. Anton Spraul",
+			Title:             "Think Like a Programmer: An Introduction to Creative Problem Solving",
+			Copies:            1,
+			OnSpecial:         false,
+			SpecialOffer:      "0%",
+			RoyaltyPercentage: 15.5,
+			PriceInCents:      900,
+		},
 
-		{author: "John Arundel",
-			title:             "For the Love of Go",
-			copies:            12,
-			onSpecial:         true,
-			specialOffer:      "40%",
-			royaltyPercentage: 15.5,
-			priceInCents:      4500},
+		{
+			Author:            "John Arundel",
+			Title:             "For the Love of Go",
+			Copies:            12,
+			OnSpecial:         true,
+			SpecialOffer:      "40%",
+			RoyaltyPercentage: 15.5,
+			PriceInCents:      4500,
+		},
 	}
 
-	books = AddBook(books, Book{author: "William Kennedy", title: "Ultimate Go Notebook"})
+	books = AddBook(books, Book{Author: "William Kennedy", Title: "Ultimate Go Notebook"})
 
 	fmt.Println(books)
 	for _, b := range books {
-		fmt.Println(b.author)
+		fmt.Println(b.Author)
 	}
 
 }
