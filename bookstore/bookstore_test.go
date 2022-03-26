@@ -41,6 +41,7 @@ func TestBook(t *testing.T) {
 		SpecialOffer:      "0%",
 		RoyaltyPercentage: 15.5,
 		PriceInCents:      900,
+		//category:          "Education",
 	}
 }
 
@@ -98,6 +99,16 @@ func TestAddBook(t *testing.T) {
 	got := catalog.GetAllBooks()
 	if !cmp.Equal(want, got) {
 		t.Error(cmp.Diff(want, got))
+	}
+}
+
+func TestSetCategory(t *testing.T) {
+	b := bookstore.Book{
+		Title: "Think Like a Programmer: An Introduction to Creative Problem Solving",
+	}
+	err := b.SetCategory("foo")
+	if err == nil {
+		t.Error("want error seting foo category, got nil")
 	}
 }
 

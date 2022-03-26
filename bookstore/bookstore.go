@@ -12,6 +12,7 @@ type Book struct {
 	RoyaltyPercentage float64
 	PriceInCents      int
 	DiscountPercent   int
+	category          string
 }
 
 type Catalog map[string]Book
@@ -50,4 +51,9 @@ func (b *Book) SetTitle(t string) {
 
 func (b *Book) SetPriceCents(i int) {
 	b.PriceInCents = i
+}
+
+func (b *Book) SetCategory(c string) error {
+	b.category = c
+	return nil
 }
