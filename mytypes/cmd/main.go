@@ -2,11 +2,13 @@ package main
 
 import (
 	"fmt"
-	"mytypes"
 )
 
+func Double(i *int) {
+
+}
+
 func main() {
-	var mb mytypes.MyBuilder
-	mb.WriteString("hello")
-	fmt.Println(mb.String())
+	var x *int
+	fmt.Println(x)
 }
