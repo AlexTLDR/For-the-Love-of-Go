@@ -54,11 +54,15 @@ func (b *Book) SetPriceCents(i int) {
 }
 
 func (b *Book) SetCategory(c string) error {
-	if c != "Science" {
+	if !validCategory(c) {
 		return fmt.Errorf("invalid category %q", c)
 	}
 	b.category = c
 	return nil
+}
+
+func validCategory(c string) bool {
+	return c == "Science"
 }
 
 func (b Book) Category() string {

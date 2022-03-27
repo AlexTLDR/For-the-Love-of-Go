@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 var catalog = bookstore.Catalog{
@@ -41,7 +42,6 @@ func TestBook(t *testing.T) {
 		SpecialOffer:      "0%",
 		RoyaltyPercentage: 15.5,
 		PriceInCents:      900,
-		//category:          "Education",
 	}
 }
 
@@ -72,7 +72,7 @@ func TestGetAllBooks(t *testing.T) {
 		},
 	}
 	got := catalog.GetAllBooks()
-	if !cmp.Equal(want, got) {
+	if !cmp.Equal(want, got, cmpopts.IgnoreUnexported(bookstore.Book{})) {
 		t.Error(cmp.Diff(want, got))
 	}
 }
@@ -97,7 +97,7 @@ func TestAddBook(t *testing.T) {
 	catalog.AddBook(b)
 
 	got := catalog.GetAllBooks()
-	if !cmp.Equal(want, got) {
+	if !cmp.Equal(want, got, cmpopts.IgnoreUnexported(bookstore.Book{})) {
 		t.Error(cmp.Diff(want, got))
 	}
 }
@@ -156,7 +156,6 @@ func TestNetPrice(t *testing.T) {
 		Title:        "The Go Programming Language",
 		Author:       "Alan A. A. Donovan",
 		PriceInCents: 100,
-		//DiscountPercent: 25,
 	}
 	want := 75
 	got := b.NetPrice()
