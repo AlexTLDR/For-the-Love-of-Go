@@ -1,14 +1,12 @@
 package main
 
-import "fmt"
-
-func Overwrite(s []int) {
-	s[0] = 0
-}
+import (
+	"bookstore"
+	"fmt"
+)
 
 func main() {
-	nums := []int{1, 2, 3}
-	fmt.Println(nums)
-	Overwrite(nums)
-	fmt.Println(nums)
+	var b bookstore.Book
+	err := b.SetCategory(bookstore.CategoryScience)
+	fmt.Println(err)
 }

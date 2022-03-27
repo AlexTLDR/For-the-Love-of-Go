@@ -106,16 +106,16 @@ func TestSetCategory(t *testing.T) {
 	b := bookstore.Book{
 		Title: "Think Like a Programmer: An Introduction to Creative Problem Solving",
 	}
-	err := b.SetCategory("foo")
+	err := b.SetCategory(-1)
 	if err == nil {
 		t.Error("want error setting foo category, got nil")
 	}
-	err = b.SetCategory("Science")
+	err = b.SetCategory(bookstore.CategoryScience)
 	if err != nil {
 		t.Errorf("want no error setting valid category, got %v", err)
 	}
 	got := b.Category()
-	want := "Science"
+	want := bookstore.CategoryScience
 	if !cmp.Equal(want, got) {
 		t.Error(cmp.Diff(want, got))
 	}

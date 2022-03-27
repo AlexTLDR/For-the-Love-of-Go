@@ -6,7 +6,7 @@ import (
 )
 
 type order struct {
-	orderID string
+	id string
 }
 
 func New(id string) (*order, error) {
@@ -14,18 +14,18 @@ func New(id string) (*order, error) {
 		return &order{}, fmt.Errorf("invalid ID: %q", id)
 	}
 	return &order{
-		orderID: id,
+		id: id,
 	}, nil
 }
 
 func (o order) ID() string {
-	return o.orderID
+	return o.id
 }
 
 func (o *order) SetID(id string) error {
 	if id == "" {
 		return errors.New("Invalid ID! The ID must not be empty")
 	}
-	o.orderID = id
+	o.id = id
 	return nil
 }
