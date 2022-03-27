@@ -108,7 +108,35 @@ func TestSetCategory(t *testing.T) {
 	}
 	err := b.SetCategory("foo")
 	if err == nil {
-		t.Error("want error seting foo category, got nil")
+		t.Error("want error setting foo category, got nil")
+	}
+	err = b.SetCategory("Science")
+	if err != nil {
+		t.Errorf("want no error setting valid category, got %v", err)
+	}
+	got := b.Category()
+	want := "Science"
+	if !cmp.Equal(want, got) {
+		t.Error(cmp.Diff(want, got))
+	}
+}
+
+func TestSetDiscountPercent(t *testing.T) {
+	b := bookstore.Book{
+		Title: "Think Like a Programmer: An Introduction to Creative Problem Solving",
+	}
+	err := b.SetDiscountPercent(101)
+	if err == nil {
+		t.Error("want error setting discount percent < 0 or > 0, got nil")
+	}
+	err = b.SetDiscountPercent(25)
+	if err != nil {
+		t.Errorf("want no error setting valid category, got %d", err)
+	}
+	got := b.DiscountPercent()
+	want := 25
+	if !cmp.Equal(want, got) {
+		t.Error(cmp.Diff(want, got))
 	}
 }
 
@@ -125,10 +153,10 @@ func TestGetBookDetails(t *testing.T) {
 func TestNetPrice(t *testing.T) {
 	t.Parallel()
 	b := bookstore.Book{
-		Title:           "The Go Programming Language",
-		Author:          "Alan A. A. Donovan",
-		PriceInCents:    100,
-		DiscountPercent: 25,
+		Title:        "The Go Programming Language",
+		Author:       "Alan A. A. Donovan",
+		PriceInCents: 100,
+		//DiscountPercent: 25,
 	}
 	want := 75
 	got := b.NetPrice()

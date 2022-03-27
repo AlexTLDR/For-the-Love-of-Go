@@ -11,7 +11,7 @@ type Book struct {
 	SpecialOffer      string
 	RoyaltyPercentage float64
 	PriceInCents      int
-	DiscountPercent   int
+	discountPercent   int
 	category          string
 }
 
@@ -35,7 +35,7 @@ func (catalog Catalog) GetBookDetails(ID string) string {
 }
 
 func (b Book) NetPrice() int {
-	saving := b.PriceInCents * b.DiscountPercent / 100
+	saving := b.PriceInCents * b.discountPercent / 100
 	return b.PriceInCents - saving
 }
 
@@ -54,6 +54,25 @@ func (b *Book) SetPriceCents(i int) {
 }
 
 func (b *Book) SetCategory(c string) error {
+	if c != "Science" {
+		return fmt.Errorf("invalid category %q", c)
+	}
 	b.category = c
 	return nil
+}
+
+func (b Book) Category() string {
+	return b.category
+}
+
+func (b *Book) SetDiscountPercent(d int) error {
+	if d < 0 || d > 100 {
+		return fmt.Errorf("invalid discount %d", d)
+	}
+	b.discountPercent = d
+	return nil
+}
+
+func (b Book) DiscountPercent() int {
+	return b.discountPercent
 }
